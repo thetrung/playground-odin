@@ -1,6 +1,6 @@
 Playground Odin
 ================
-Faster/Easier to write than C/Zig/Rust, while remaining as performant.
+[Fast as C](https://programming-language-benchmarks.vercel.app/odin-vs-c) while Simpler to write than Zig/Rust.
 
 ### Examples 
 1. memory allocation & pointer/dereference in use (^/^^/&).
