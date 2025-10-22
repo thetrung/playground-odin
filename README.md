@@ -3,8 +3,9 @@ Playground Odin
 [Fast as C](https://programming-language-benchmarks.vercel.app/odin-vs-c) while Simpler to write than Zig/Rust.
 
 ### Examples 
-1. memory allocation & pointer/dereference in use (^/^^/&).
-2. game of life : loop, struct, defer, raylib example.
+1. [memory allocation](https://github.com/thetrung/playground-odin/tree/main/mem_alloc) & pointer/dereference in use (^/^^/&).
+2. [game of life](https://github.com/thetrung/playground-odin/tree/main/game_of_life) : loop, struct, defer, raylib example.
+3. [raylib glb loader](https://github.com/thetrung/playground-odin/tree/main/raylib_glb_loader) : interop with C library & Ctypes/CArray usage.
 
 ### Install Odin on Ubuntu 25.04
 I assume you will want to install `Odin` into `$HOME/Odin`, change the path as you wish : 
