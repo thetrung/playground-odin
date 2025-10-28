@@ -12,18 +12,24 @@ asset_path :: proc(asset: string) -> cstring {
 }
 
 main :: proc (){
+    // =============================
+    // CONFIG 
+    // =============================
     using raylib // namespace but only locally
     screen_width  :i32 = 800
     screen_height :i32 = 450
-    InitWindow(screen_width, screen_height, "raylib on Odin")
+    InitWindow(
+        screen_width, 
+        screen_height, 
+        "raylib on Odin")
     defer CloseWindow()
 
     // Camera
     camera: Camera = {}
-    camera.position = Vector3 { 6.0, 6.0, 6.0 };     // Camera position
-    camera.target = Vector3 { 0.0, 2.0, 0.0 };       // Camera looking at point
-    camera.up = Vector3 { 0.0, 1.0, 0.0 };           // Camera up vector (rotation towards target)
-    camera.fovy = 45.0;                              // Camera field-of-view Y
+    camera.position = Vector3 { 6.0, 6.0, 6.0 }      // Camera position
+    camera.target = Vector3 { 0.0, 2.0, 0.0 }        // Camera looking at point
+    camera.up = Vector3 { 0.0, 1.0, 0.0 }            // Camera up vector (rotation towards target)
+    camera.fovy = 45.0                               // Camera field-of-view Y
     camera.projection = CameraProjection.PERSPECTIVE // Camera projection type
 
     // Load gltf model
@@ -38,11 +44,17 @@ main :: proc (){
     model_animations := LoadModelAnimations(robot_path, &anim_count)
     // FPS config 
     SetTargetFPS(60)
+
+    // =============================
+    // RUNTIME
+    // =============================
     // Odin doesn't have while keyword :
     for !WindowShouldClose() {
+        // =============================
+        // LOGIC 
+        // =============================
         // Update Camera
         UpdateCamera(&camera, CameraMode.ORBITAL)
-
         // Select current animation 
         if IsMouseButtonPressed(MouseButton.RIGHT) {
             anim_index = (anim_index + 1) % anim_count
@@ -54,9 +66,9 @@ main :: proc (){
         anim := model_animations[anim_index]
         anim_current_frame = (anim_current_frame +1) % anim.frameCount
         UpdateModelAnimation(model, anim, anim_current_frame)
-
+        // =============================
         // Draw 
-        //=============================================================
+        // =============================
         BeginDrawing()
             ClearBackground(RAYWHITE)
             BeginMode3D(camera)
