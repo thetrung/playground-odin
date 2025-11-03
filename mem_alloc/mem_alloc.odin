@@ -23,6 +23,7 @@ main :: proc(){
     // print :
     if success {
         fmt.printfln("Allocated a chunk of %d bytes", size * 8)
+        defer mem.free(buffer)
     } else {
         fmt.printfln("Allocation failed.")
     }
