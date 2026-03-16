@@ -94,20 +94,29 @@ render_entities :: proc() {
     }
 }
 
+init_entities :: proc() {
+    spawn_entity(.Player, Vec2{40, 120}, Vec2{0, 0}, 3)
+    spawn_entity(.Enemy, Vec2{300, 120}, Vec2{-1, 0}, 3)
+}
+
 main :: proc() {
     raylib.InitWindow(400, 240, "Contra Kernel - Odin + Raylib")
     defer raylib.CloseWindow()
     raylib.SetTargetFPS(60)
-
-    spawn_entity(.Player, Vec2{40, 120}, Vec2{0, 0}, 3)
-    spawn_entity(.Enemy, Vec2{300, 120}, Vec2{-1, 0}, 3)
+    
+    // INIT :
+    init_entities()
 
     for !raylib.WindowShouldClose() {
+        // UPDATE LOGIC :
         update_entities()
-
+        
+        // RENDER PIPELINE :
         raylib.BeginDrawing()
+        
         raylib.ClearBackground(raylib.BLACK)
         render_entities()
+        
         raylib.EndDrawing()
     }
 }
