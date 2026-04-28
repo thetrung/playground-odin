@@ -51,6 +51,7 @@ player_update :: proc(e: ^Entity) {
 	if raylib.IsKeyPressed(raylib.KeyboardKey.SPACE) {
 		spawn_entity(.Bullet, Vec2{e.pos.x + 8, e.pos.y}, Vec2{4, 0}, 1)
 	}
+	if raylib.IsKeyPressed(raylib.KeyboardKey.ENTER) do is_pressed_quit = true
 }
 
 bullet_update :: proc(e: ^Entity) {
@@ -105,7 +106,10 @@ init_entities :: proc() {
 	spawn_entity(.Enemy, Vec2{300, 120}, Vec2{-1, 0}, 3)
 }
 
+is_pressed_quit := false
+
 main :: proc() {
+	raylib.SetTraceLogLevel(raylib.TraceLogLevel.NONE)
 	raylib.InitWindow(400, 240, "Contra Kernel - Odin + Raylib")
 	defer raylib.CloseWindow()
 	raylib.SetTargetFPS(60)
@@ -113,7 +117,7 @@ main :: proc() {
 	// INIT :
 	init_entities()
 
-	for !raylib.WindowShouldClose() {
+	for !raylib.WindowShouldClose() && !is_pressed_quit {
 		// UPDATE LOGIC :
 		update_entities()
 
